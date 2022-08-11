@@ -9,5 +9,5 @@ As base dos pedidos de férias e dos feriados nacionais ficará guardada em uma 
 Para este projeto utilizamos:
 <br>
  - Funções, métodos e condicionais;
- - Consulta, leitura e gravação em arquivos via pandas
- - Manipulação de datas via datetime
+ - Consulta, leitura e gravação em arquivos via pandas;
+ - Manipulação de datas via datetime.
