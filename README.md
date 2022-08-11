@@ -11,3 +11,6 @@ Para este projeto utilizamos:
  - Funções, métodos e condicionais;
  - Consulta, leitura e gravação em arquivos via pandas;
  - Manipulação de datas via datetime.
+<br>
+<br>
+Obs.: O projeto ainda não está completo, será necessário novas atualizações afim de obter o resultado 100% esperado.
