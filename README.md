@@ -7,6 +7,7 @@ O objetivo do software é fazer o controle dos pedidos de férias dos funcionár
 As consultas dos funcionários que já pediram as férias e inclusão de novos pedidos ficarão guardadas em uma planilha, onde pelo próprio software o colaborador conseguirá consultar, incluir ou excluir o seu pedido.
 <br>
 Para este projeto utilizamos:
+<br>
  - Funções, métodos e condicionais;
  - Consulta, leitura e gravação em arquivos via pandas
  - Manipulação de datas via datetime
