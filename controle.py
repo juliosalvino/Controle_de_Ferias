@@ -38,6 +38,7 @@ opção de encerrar ou fazer uma nova gravação - feito
 
 import os
 import datetime as dt
+from tkinter.tix import COLUMN
 import pandas as pd
 import sys
 
@@ -58,15 +59,45 @@ def pedidos_do_setor():
     print("\n")
     print("Escolha o seu setor, e visualize os pedidos de férias já existentes.")
     print("\n")
-    print("Setores disponíveis:\n1 - Marketing\n2 - Tecnologia\n3 - Logística\n4 - Produtos\n5 - Atendimento\n6 - Diretoria\n7 - Facilities")
+    print("Setores disponíveis:\n1 - Marketing\n2 - Tecnologia\n3 - Logística\n4 - Produtos\n5 - Operações\n6 - Diretoria\n7 - Facilities")
     print("\n")
-    input("Digite o número do seu setor: ")
-    df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-    print(df_xlsx)
-
+    input_setor = input("Digite o número do seu setor: ")
+   
+    #Separando por setores
+    if input_setor == "1":
+        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
+        df2 = df_xlsx.query("Setor == Marketing")
+        print(df2)
+    elif input_setor == "2":
+        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
+        df_xlsx.loc[df_xlsx["Setor"]=="Tecnologia"]
+        print(df_xlsx)   
+    elif input_setor == "3":
+        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
+        df_xlsx.loc[df_xlsx["Setor"]=="Logística"]
+        print(df_xlsx)
+    elif input_setor == "4":
+        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
+        df_xlsx.loc[df_xlsx["Setor"]=="Produtos"]
+        print(df_xlsx)
+    elif input_setor == "5":
+        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
+        df_xlsx.loc[df_xlsx["Setor"]=="Operações"]
+        print(df_xlsx)
+    elif input_setor == "6":
+        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
+        df_xlsx.loc[df_xlsx["Setor"]=="Diretoria"]
+        print(df_xlsx)
+    elif input_setor == "7":
+        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
+        df_xlsx.loc[df_xlsx["Setor"]=="Facilities"]
+        print(df_xlsx)
+    else:
+        print("Digite uma opção correta, de 1 á 7 !!!")
+        pedidos_do_setor()
 #abrir e visualizar os feriados nacionais, e depois dar a opção de gravar um pedido, voltar ao menu ou sair.
 
-def feriados_nacionais(): 
+def feriados_nacionais(): #concluído
     print("\n")
     print("Verifique abaixo os feriados nacionais.\nLembre-se: Férias não podem começar nos dias:")
     print("\n")
@@ -75,14 +106,20 @@ def feriados_nacionais():
     df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "feriados_nacionais")
     print(df_xlsx)
     print("\n")
+
+    #Final da função, chama as opções para retornos:
     final = input("Digite 1 para retornar ao menu, 2 para entrar com um novo pedido, ou qualquer tecla para encerrar: ")
+
     if final == "1":
-        menu()
+        python = sys.executable
+        os.execl(python,python, * sys.argv)
     elif final == "2":
         novo_pedido()
     else:
         print("Obrigado e até mais!")
         exit()
+
+#incluir ou excluir um pedido
 
 def novo_pedido():
     print("\n")
@@ -93,20 +130,18 @@ def novo_pedido():
     input("Digite o número do seu setor: ")
     input("Digite a data de início das férias: ")
     input("Digite a data de encerramento das férias: ")
+    #incluir ou excluir, e depois visualizar, e dar a opção de retornar ao menu ou encerrar.
 
 
 if entrada =="1":
     pedidos_do_setor()
-
 elif entrada == "2":
     feriados_nacionais()
-
 elif entrada == "3":
     novo_pedido()
-
 elif entrada == "4":
     exit()
-
 else:
-    print("Opção inválida, digite uma opção de 1 á 4 !!!")
-    menu()
+    print("Você digitou uma opção inválida, o sistema será reiniciado, digite uma opção de 1 á 4 !!!")
+    python = sys.executable
+    os.execl(python,python, * sys.argv)
