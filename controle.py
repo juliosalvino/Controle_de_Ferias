@@ -1,28 +1,8 @@
 """
-
-Controle de férias
-
-
-opções:
-
-visualizar os pedidos de férias do seu setor (input de setor)
-visualizar feriados nacionais
-entrar com pedido de férias (será enviado para o rh)
-    
-entradas (entrar com pedido de férias):
-
-nome
-setor
-data de entrada
-data de saida
-
-A legislação proíbe o início das férias em dias que antecedem feriados ou repouso semanal remunerado, 
-ou seja, as férias não podem começar em um sábado ou domingo, nem na quinta-feira e nem na sexta-feira.
-
-
 verificações necessárias:
 
-verificar se o nome já está gravado, se estiver, mostrar as opções na tela e perguntar se quer colocar uma nova data,
+verificar se o nome já está gravado, se estiver, mostrar as opções na tela e perguntar se quer colocar uma
+ nova data,
 se sim, seguir com as demais opções, se não, ir direto para a opção de encerrar ou reiniciar a gravação
 identificar se a diferença de entrada e saida é maior que 30 dias (se for maior, mensagem de erro)
 identificar se a entrada é em um dos dias que não pode (se for, mensagem de erro)
@@ -55,7 +35,7 @@ entrada = input("Digite a opção desejada: ")
 
 #Entrada de pedido de férias, será gravado na planilha ferias.xlsx, na sheet pedidos_ao_rh
 
-def pedidos_do_setor():
+def pedidos_do_setor(): #quase pronto
     print("\n")
     print("Escolha o seu setor, e visualize os pedidos de férias já existentes.")
     print("\n")
@@ -65,38 +45,66 @@ def pedidos_do_setor():
    
     #Separando por setores
     if input_setor == "1":
-        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-        df2 = df_xlsx.query("Setor == Marketing")
-        print(df2)
+        df_xlsx = pd.read_excel(r"ferias.xlsx", sheet_name= "pedidos_ao_rh", engine= "openpyxl")
+        df_filtrado = df_xlsx["Setor"] == "Marketing"
+        print("\n")
+        print(df_xlsx[df_filtrado])
+        print("\n")     
     elif input_setor == "2":
-        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-        df_xlsx.loc[df_xlsx["Setor"]=="Tecnologia"]
-        print(df_xlsx)   
+        df_xlsx = pd.read_excel(r"ferias.xlsx", sheet_name= "pedidos_ao_rh", engine= "openpyxl")
+        df_filtrado = df_xlsx["Setor"] == "Tecnologia"
+        print("\n")
+        print(df_xlsx[df_filtrado])
+        print("\n")
     elif input_setor == "3":
-        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-        df_xlsx.loc[df_xlsx["Setor"]=="Logística"]
-        print(df_xlsx)
+        df_xlsx = pd.read_excel(r"ferias.xlsx", sheet_name= "pedidos_ao_rh", engine= "openpyxl")
+        df_filtrado = df_xlsx["Setor"] == "Logística"
+        print("\n")
+        print(df_xlsx[df_filtrado])
+        print("\n")
     elif input_setor == "4":
-        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-        df_xlsx.loc[df_xlsx["Setor"]=="Produtos"]
-        print(df_xlsx)
+        df_xlsx = pd.read_excel(r"ferias.xlsx", sheet_name= "pedidos_ao_rh", engine= "openpyxl")
+        df_filtrado = df_xlsx["Setor"] == "Produtos"
+        print("\n")
+        print(df_xlsx[df_filtrado])
+        print("\n")
     elif input_setor == "5":
-        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-        df_xlsx.loc[df_xlsx["Setor"]=="Operações"]
-        print(df_xlsx)
+        df_xlsx = pd.read_excel(r"ferias.xlsx", sheet_name= "pedidos_ao_rh", engine= "openpyxl")
+        df_filtrado = df_xlsx["Setor"] == "Operações"
+        print("\n")
+        print(df_xlsx[df_filtrado])
+        print("\n")
     elif input_setor == "6":
-        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-        df_xlsx.loc[df_xlsx["Setor"]=="Diretoria"]
-        print(df_xlsx)
+        df_xlsx = pd.read_excel(r"ferias.xlsx", sheet_name= "pedidos_ao_rh", engine= "openpyxl")
+        df_filtrado = df_xlsx["Setor"] == "Diretoria"
+        print("\n")
+        print(df_xlsx[df_filtrado])
+        print("\n")
     elif input_setor == "7":
-        df_xlsx = pd.read_excel("ferias.xlsx", sheet_name= "pedidos_ao_rh")
-        df_xlsx.loc[df_xlsx["Setor"]=="Facilities"]
-        print(df_xlsx)
-    else:
+        df_xlsx = pd.read_excel(r"ferias.xlsx", sheet_name= "pedidos_ao_rh", engine= "openpyxl")
+        df_filtrado = df_xlsx["Setor"] == "Facilities"
+        print("\n")
+        print(df_xlsx[df_filtrado])
+        print("\n")
+    elif input_setor <"1" or input_setor >"7":
+        print("\n")
         print("Digite uma opção correta, de 1 á 7 !!!")
-        pedidos_do_setor()
-#abrir e visualizar os feriados nacionais, e depois dar a opção de gravar um pedido, voltar ao menu ou sair.
+        print("\n")
+    
+    
+    #Final da função, chama as opções para retornos:
+    final = input("Digite 1 para retornar ao menu, 2 para entrar com um novo pedido, ou qualquer tecla para encerrar: ")
 
+    if final == "1":
+        python = sys.executable
+        os.execl(python,python, * sys.argv)
+    elif final == "2":
+        novo_pedido()
+    else:
+        print("Obrigado e até mais!")
+        exit()
+
+#abrir e visualizar os feriados nacionais, e depois dar a opção de gravar um pedido, voltar ao menu ou sair.
 def feriados_nacionais(): #concluído
     print("\n")
     print("Verifique abaixo os feriados nacionais.\nLembre-se: Férias não podem começar nos dias:")
@@ -121,7 +129,7 @@ def feriados_nacionais(): #concluído
 
 #incluir ou excluir um pedido
 
-def novo_pedido():
+def novo_pedido(): #em andamento
     print("\n")
     print("Área de Pedidos - Digite seus dados e verifique se existe a disponibilidade que você deseja.")
     print("\n")
